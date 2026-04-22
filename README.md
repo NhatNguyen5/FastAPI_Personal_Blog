@@ -1,6 +1,6 @@
 # FastAPI Blog Application
 
-Full-stack blog platform following the Corey Schafer series. Built with **Python 3.12**, this repository implements a dual-layer architecture: a robust **REST API** for programmatic access and a server-side rendered **frontend** for human users.
+Full-stack blog platform following [the Corey Schafer series](https://youtube.com/playlist?list=PL-osiE80TeTsak-c-QsVeg0YYG_0TeyXI&si=TAQ1Nim2XPYu53xw). Built with **Python 3.12**, this repository implements a dual-layer architecture: a robust **REST API** for programmatic access and a server-side rendered **frontend** for human users.
 
 ## 🛠 Dev Stack
 
