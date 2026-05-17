@@ -11,7 +11,7 @@ import os
 from datetime import datetime
 from logging_module.file_utils import FileUtilsError, file_verify_path
 from inspect import getframeinfo, stack
-from logging_module.config import LOGGING_ENABLED, LOG_TRACING_ENABLED
+import logging_module.config as config
 
 calldepth = 3
 
@@ -23,7 +23,7 @@ class logger:
         self.log(msg, prt_msg = prt_msg, console_msg = console_msg)
 
     def log(self, message, prt_msg = False, console_msg = ""):
-        if not LOGGING_ENABLED or not self.enable:
+        if not config.LOGGING_ENABLED or not self.enable:
             return
         date = datetime.now().strftime("%Y-%m-%d")
         time = datetime.now().strftime("%H:%M:%S")
@@ -35,6 +35,7 @@ class logger:
         file_path = file_verify_path("./", "logs")
         if file_path == FileUtilsError.NOT_A_DIRECTORY.value.format(directory="logs"):
             os.makedirs(os.path.join("./", "logs"), exist_ok=True)
+            file_path = os.path.join("./", "logs")
         if isinstance(file_path, str) and not file_path.startswith("Error"):
             file_name = os.path.join("./", "logs", f"{date}_logging.txt")
             if not os.path.isfile(file_name):
@@ -46,7 +47,7 @@ class logger:
                     print(message if console_msg == "" else console_msg)
 
     def get_caller_info(self):
-        if not LOG_TRACING_ENABLED:
+        if not config.LOG_TRACING_ENABLED:
             frameinfo = getframeinfo(stack()[calldepth][0])
             return f"{frameinfo.filename.rsplit('/', 1)[-1]}:{frameinfo.lineno}"
         trace_back_stack = []
